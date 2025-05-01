@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CoffeeChatCalendar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49e141655b8516771bcad06921b217cc718b81f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31f266772ffaf5595c2569c6815e5919581df36e")]
 [assembly: System.Reflection.AssemblyProductAttribute("CoffeeChatCalendar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CoffeeChatCalendar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
