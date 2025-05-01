@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ASUS/Desktop/calender/CoffeeChatCalender/CoffeeChatCalendar.csproj",
+      "projectUniqueName": "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/CoffeeChatCalendar.csproj",
       "projectName": "CoffeeChatCalendar",
-      "projectPath": "/Users/ASUS/Desktop/calender/CoffeeChatCalender/CoffeeChatCalendar.csproj",
+      "projectPath": "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/CoffeeChatCalendar.csproj",
       "packagesPath": "/Users/ASUS/.nuget/packages/",
-      "outputPath": "/Users/ASUS/Desktop/calender/CoffeeChatCalender/obj/",
+      "outputPath": "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ASUS/.nuget/NuGet/NuGet.Config"

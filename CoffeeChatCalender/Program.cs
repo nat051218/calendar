@@ -1,6 +1,6 @@
 ﻿using System;  // Brings in the System namespace, which contains basic tools like Console
 using System.Collections.Generic; // Brings in tools for working with lists and collections
-using CoffeeChatCalender; //imports CoffeeChatCalender namespace
+using CoffeeChatCalendar; //imports CoffeeChatCalender namespace
 
 class Program
 {
