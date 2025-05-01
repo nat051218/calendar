@@ -1,0 +1,10 @@
+/Users/ASUS/Desktop/calender/CoffeeChatCalendar/obj/Debug/net9.0/CoffeeChatCalendar.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ASUS/Desktop/calender/CoffeeChatCalendar/obj/Debug/net9.0/CoffeeChatCalendar.AssemblyInfoInputs.cache
+/Users/ASUS/Desktop/calender/CoffeeChatCalendar/obj/Debug/net9.0/CoffeeChatCalendar.AssemblyInfo.cs
+/Users/ASUS/Desktop/calender/CoffeeChatCalendar/obj/Debug/net9.0/CoffeeChatCalendar.csproj.CoreCompileInputs.cache
+/Users/ASUS/Desktop/calender/CoffeeChatCalendar/obj/Debug/net9.0/CoffeeChatCalendar.sourcelink.json
+/Users/ASUS/Desktop/calender/CoffeeChatCalender/obj/Debug/net9.0/CoffeeChatCalendar.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ASUS/Desktop/calender/CoffeeChatCalender/obj/Debug/net9.0/CoffeeChatCalendar.AssemblyInfoInputs.cache
+/Users/ASUS/Desktop/calender/CoffeeChatCalender/obj/Debug/net9.0/CoffeeChatCalendar.AssemblyInfo.cs
+/Users/ASUS/Desktop/calender/CoffeeChatCalender/obj/Debug/net9.0/CoffeeChatCalendar.csproj.CoreCompileInputs.cache
+/Users/ASUS/Desktop/calender/CoffeeChatCalender/obj/Debug/net9.0/CoffeeChatCalendar.sourcelink.json

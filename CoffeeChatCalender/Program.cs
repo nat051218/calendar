@@ -1,4 +1,5 @@
-using System; //brings in the systems namespace, toolbox that contains many of the most-used basic tool of C#
+﻿// See https://aka.ms/new-console-template for more information
+using Systems //brings in the systems namespace, toolbox that contains many of the most-used basic tool of C#
 using System.Collections.Generic; //System = the toolbox, Collections = a drawer inside the toolbox, Generic =flexible, reusable container
 class ChatTopic //define ChatTopic class
 {
@@ -45,13 +46,13 @@ class Program //contains the main()method, the entry of every C# application
             Console.WriteLine ("3. View Bookings");
             Console.WriteLine ("4. Exit");
             Console.Write ("Select an option");// Write = print and stay on the same line 
-            var input = Console.ReadLine(); // var = make a new variable, input = name of the variable, Console.Readline() = wait for the user to type something and hit enter
+            var input = Console.Readline(); // var = make a new variable, input = name of the variable, Console.Readline() = wait for the user to type something and hit enter
             switch (input) //switch = check which option the user selected and do the corresponding action
             {
                 case"1": ShowTopics(); break; //break = stop checking other cases 
-                case"2": BookChat(); break; 
+                case"2": BookCahat(); break; 
                 case"3": ViewBookings(); break; 
-                case"0": return; //return = exit the program in Main(), bcs Main() is the entry point of the program; case 0 is often used to exit/return
+                case"4': return; //return = exit the program in Main(), bcs Main() is the entry point of the program
                 default: Console.WriteLine ("Invalid input, please try again."); break; //default = do this if the user types something that is not one of the options provided 
             }
         }
@@ -71,6 +72,7 @@ class Program //contains the main()method, the entry of every C# application
     {
         ShowTopics(); //call the ShowTopics() method to show the list of topics 
         Console.Write("\nChoose a topic!");
+    }
 
     //checking if the typed-in numver is valid 
     if (!int.TryParse(Console.ReadLine(), out int topicIndex) ||topicIndex <1 || topicIndex >topics.Count) //TryParse = a method used to convert a string into an int; If convertion succeeds, furthercheck if the number is valid, if yes, store the int output in topicIndex
@@ -82,30 +84,29 @@ class Program //contains the main()method, the entry of every C# application
     Console.Write ("Please enter your name:");
     string name = Console.ReadLine(); //stores the user input in name 
     Console.Write ("Please enter your preferred time:"); 
-    string time = Console.ReadLine (); //stores the user input in time 
+    string time - Console.ReadLine (); //stores the user input in time 
 
     var booking = new Booking(name, topics[topicIndex -1], time); //create a new booking object using the Booking class; [topicIndex -1] tells the computer which topic to grab from the bookings list
-    bookings.Add(booking); //add the new booking to bookings list 
+    bookings.Add(Booking); //add the new booking to bookings list 
 
     Console.WriteLine ($"\nBooking confirmed! {name}, you have booked a quick coffee chat on {booking.topic.title}} at {time}."); //confirm booking message
-    }
 
     static void ViewBookings()
     {
         if (bookings.Count == 0) //no bookings 
         {
             Console.WriteLine ("\nNo bookings yet. Schedule one now!"); 
-            return; //exit ViewBookings() method 
+            return' //exit ViewBookings() method 
         }
     }
 
-    Console.WriteLine ("\nYour future bookings!");
+    Console.WriteLine (\nYour future bookings!); 
     foreach (var b in bookings) //foreach = loop through each booking in the bookings list; b = a short nickname for booking  
     {
-        Console.WriteLine ($"\n{b.Name} - {booking.Topic.Title} - {b.Time}"); //print out the booking details 
+        Console.WriteLine ("$\n{b.Name} - (booking.Topic.Title} - {b.Time}"); //print out the booking details 
     }
 
-}
+
 
 
 
@@ -113,6 +114,7 @@ class Program //contains the main()method, the entry of every C# application
 
 
  
+
 
 
 
