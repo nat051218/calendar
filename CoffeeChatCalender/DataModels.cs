@@ -1,9 +1,7 @@
 using System; //brings in the systems namespace, toolbox that contains many of the most-used basic tool of C#
 using System.Collections.Generic; //System = the toolbox, Collections = a drawer inside the toolbox, Generic =flexible, reusable container
 // 
-namespace CoffeeChatCalender; 
-
- //namespace = like a link that connects related pieces of code
+namespace CoffeeChatCalender; //namespace = like a link that connects related pieces of code
  
 class ChatTopic //define ChatTopic class
 {
