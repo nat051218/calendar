@@ -1,7 +1,7 @@
 ﻿using System;  // Brings in the System namespace, which contains basic tools like Console
 using System.Collections.Generic; // Brings in tools for working with lists and collections
 using System.Runtime.CompilerServices;
-using CoffeeChatCalendar; //imports CoffeeChatCalender namespace
+using CoffeeChatCalendar;
 
 class Program
 {
@@ -14,62 +14,78 @@ class Program
 
     static List<Booking> bookings = new List<Booking>(); // List to store user bookings
 
+    static List<User> users = new List<User>(); //List to store user profiles. Should be put here instead of DataModels.cs because it runs the logic, not just define what the data looks like 
 
-    static void Main() // Main method: Entry point of the program
+    static string GetValidatedInput(string prompt) //GetValidatedInput = keeps asking the user for input until they follow format.
     {
-        List<User> users = new List<User>(); //List to store user profiles. Should be put here instead of DataModels.cs because it runs the logic, not just define what the data looks like 
-        Console.WriteLine("Welcome to the Coffee Chat Booking System!"); //Welcome message
-        Console.WriteLine("======================================="); // Display a separator line
+        Console.Write(prompt);
+        string input = Console.ReadLine() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            Console.WriteLine("Invalid input. Please try again.");
+            return GetValidatedInput(prompt);
+        }
+        return input;
+    }
 
-        Console.Write("Please enter your name here: ");
-        string name = Console.ReadLine() ?? string.Empty; //?? = null-coalescing operator, if the vale isn't null, use the value on the left, it is null, use the value on the right.
-
-        Console.WriteLine("Please enter your available times in the following format: 9:00 AM, 10:00 AM, 4:00 PM");
-        string timesInput = Console.ReadLine() ?? string.Empty; // Handle potential null value
+    static List<string> GetValidatedTimeInput(string prompt)
+    {
+        Console.WriteLine(prompt);
+        string timesInput = Console.ReadLine() ?? string.Empty;
         List<string> availableTimes = timesInput.Split(',').Select(t => t.Trim()).ToList();
-
-        if (string.IsNullOrWhiteSpace(name) || availableTimes.Count == 0) // Validate inputs
+        if (availableTimes.Count == 0 || availableTimes.Any(string.IsNullOrWhiteSpace))
         {
-            Console.WriteLine("Invalid input. Please restart the program and provide valid details.");
-            return;
+            Console.WriteLine("Invalid time input. Please try again.");
+            return GetValidatedTimeInput(prompt);
         }
-        User newUser = new User(name, availableTimes); // Create a new user object (profile)
-        foreach (var time in newUser.AvailableTimes) // Loop through the available times
+        return availableTimes;
+    }
+
+    // Refactor Main method to use helper methods
+    static void Main()
+    {
+        Console.WriteLine("Welcome to the Coffee Chat Booking System!");
+        Console.WriteLine("=======================================");
+
+        string name = GetValidatedInput("Please enter your name here: ");
+        List<string> availableTimes = GetValidatedTimeInput("Please enter your available times in the following format: 9:00 AM, 10:00 AM, 4:00 PM");
+
+        User newUser = new User(name, availableTimes);
+        foreach (var time in newUser.AvailableTimes)
         {
-            Console.WriteLine($"What topic are you open to at {time}?");
-            string topicInput = Console.ReadLine() ?? string.Empty;
-            newUser.TimeTopics[time] = topicInput; //[] = lets you assign or access a value in a dict.
-
+            string topicInput = GetValidatedInput($"What topic are you open to at {time}?\n");
+            newUser.TimeTopics[time] = topicInput;
         }
 
-        users.Add(newUser); // Store the new user in the users list
+        users.Add(newUser);
 
         Console.WriteLine($"Welcome {name}!");
         Console.WriteLine("Times and topics you're open to: ");
         foreach (var entry in newUser.TimeTopics)
         {
-            Console.WriteLine($"{entry.Key} - {entry.Value}"); //entry.Key = time, entry.Value = topic
+            Console.WriteLine($"{entry.Key} - {entry.Value}");
         }
 
-        while (true) // Infinite loop to keep the program running until the user exits
+        while (true)
         {
-            Console.WriteLine("Book a Quick Coffee Chat"); // Display the program title
-            Console.WriteLine("============================="); // Display a separator line
-            Console.WriteLine("1. View Topics"); // Option to view available topics
-            Console.WriteLine("2. Book a Chat"); // Option to book a chat
-            Console.WriteLine("3. View Bookings"); // Option to view existing bookings
-            Console.WriteLine("4. Exit"); // Option to exit the program
-            Console.Write("Select an option: "); // Prompt the user to select an option
-            var input = Console.ReadLine(); // Read the user's input
-            switch (input) // Handle the user's input
+            Console.WriteLine("Book a Quick Coffee Chat");
+            Console.WriteLine("=============================");
+            Console.WriteLine("1. View Topics");
+            Console.WriteLine("2. Book a Chat");
+            Console.WriteLine("3. View Bookings");
+            Console.WriteLine("4. Exit");
+            Console.Write("Select an option: ");
+            var input = Console.ReadLine();
+
+            switch (input)
             {
-                case "1": ShowTopics(); break; // Call ShowTopics() if the user selects 1
-                case "2": BookChat(); break; // Call BookChat() if the user selects 2
-                case "3": ViewBookings(); break; // Call ViewBookings() if the user selects 3
-                case "4": return; // Exit the program if the user selects 4
+                case "1": ShowTopics(); break;
+                case "2": BookChat(name); break; // Pass 'name' to BookChat
+                case "3": ViewBookings(); break;
+                case "4": return;
                 default:
                     Console.WriteLine("Invalid input, please try again.");
-                    break; // Handle invalid input
+                    break;
             }
         }
     }
@@ -83,26 +99,45 @@ class Program
         }
     }
 
-    static void BookChat() // Method to book a chat
+    static void BookChat(string name) // Add 'name' as a parameter
     {
-        ShowTopics(); // Display the list of topics
-        Console.Write("\nChoose a topic: "); // Prompt the user to choose a topic
-
-        if (!int.TryParse(Console.ReadLine(), out int topicIndex) || topicIndex < 1 || topicIndex > topics.Count) // Validate the user's input
+        Console.WriteLine("\nAvailable Chats!: ");
+        int i = 1; //number the available chats 
+        Dictionary<int, (User, string)> options = new Dictionary<int, (User, string)>(); //Create a dict. to store the available chats. User = key. String = value.
+        foreach (var user in users) //Loop through the users
         {
-            Console.WriteLine("Invalid input, please try again."); // Display an error message for invalid input
-            return; // Exit the method
+            foreach (var entry in user.TimeTopics) //Loop through time-topic pairs 
+            {
+                string time = entry.Key;
+                string topic = entry.Value;
+                bool alreadyBooked = bookings.Exists(b => b.Time == time && b.selectedUser.Name == user.Name); //bool = boolean expression. b = booking. b,Time = accesses the time property of the booking. time = the time slot the user is trying to book. Exists() = check if there is at least one element in the list and if the element matches the condition. && = short circuit evaluation, only evaluates the second condition if the first one is true.
+                if (alreadyBooked) continue; //continue = skip it, don't show.
+
+                Console.WriteLine($"{i}. {user.Name} - {time} - {topic}"); //Display the available chats
+                options[i] = (user, time); //save the user and time in the dict.
+                i++; //plus one 
+            }
         }
 
-        Console.Write("Please enter your name: "); // Prompt the user to enter their name
-        string name = Console.ReadLine(); // Read the user's name
-        Console.Write("Please enter your preferred time: "); // Prompt the user to enter their preferred time
-        string time = Console.ReadLine(); // Read the user's preferred time
+        if (options.Count == 0) //No available options
+        {
+            Console.WriteLine("No available chats at the moment. Please check back later!");
+            return;
+        }
 
-        var booking = new Booking(name, topics[topicIndex - 1], time); // Create a new booking object
+        Console.Write("\nBook a chat by entering the corresponding number: ");
+        if (!int.TryParse(Console.ReadLine(), out int choice) || !options.ContainsKey(choice))//validate if the user's input can be parsed as an int. then validate if the input is one of the keys in the dict. 
+        {
+            Console.WriteLine("Invalid input, please try again."); //Error message
+            return;
+        }
+
+        var (selectedUser, selectedTime) = options[choice]; //Unpack the tuple. selectedUser = host. 
+        var selectedTopic = new ChatTopic(selectedUser.TimeTopics[selectedTime], ""); // Create a ChatTopic object from the selected time topic
+        var booking = new Booking(name, selectedUser, selectedTopic, selectedTime); // Create a new booking object
         bookings.Add(booking); // Add the booking to the list of bookings
 
-        Console.WriteLine($"\nBooking confirmed! {name}, you have booked a quick coffee chat on {booking.Topic.Title} at {time}."); // Confirm the booking
+        Console.WriteLine($"\nBooking confirmed! {name}, you have booked a quick coffee chat with {selectedUser.Name} on {selectedTopic.Title} at {selectedTime}."); //Confirm booking message 
     }
 
     static void ViewBookings() // Method to view existing bookings

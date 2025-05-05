@@ -16,12 +16,15 @@ class ChatTopic //define ChatTopic class
 
 class Booking //define Booking class
 {
-    public string Name { get; set; }
-    public ChatTopic Topic { get; set; }
-    public string Time { get; set; }
-    public Booking(string userName, ChatTopic topic, string time) //constructor, allows user to create a new booking
+    public string Name { get; set; } // The name of the person booking the chat
+    public User selectedUser { get; set; } // The user being booked for the chat
+    public ChatTopic Topic { get; set; } // The topic of the chat (now a ChatTopic object)
+    public string Time { get; set; } // The time of the chat
+
+    public Booking(string name, User selectedUser, ChatTopic topic, string time) // Constructor to initialize a booking
     {
-        Name = userName;
+        Name = name;
+        this.selectedUser = selectedUser;
         Topic = topic;
         Time = time;
     }
@@ -36,7 +39,7 @@ class User
     {
         Name = name;
         AvailableTimes = availableTimes;
-        TimeTopics = new Dictionary<string, string> (); //We don't receive it, so we need to create it from scratch. 
+        TimeTopics = new Dictionary<string, string>(); //We don't receive it, so we need to create it from scratch. 
     }
 }
 
