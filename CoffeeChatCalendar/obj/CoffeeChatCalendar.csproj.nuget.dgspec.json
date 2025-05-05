@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/CoffeeChatCalendar.csproj": {}
+    "/Users/ASUS/Desktop/calendar/CoffeeChatCalendar/CoffeeChatCalendar.csproj": {}
   },
   "projects": {
-    "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/CoffeeChatCalendar.csproj": {
+    "/Users/ASUS/Desktop/calendar/CoffeeChatCalendar/CoffeeChatCalendar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/CoffeeChatCalendar.csproj",
+        "projectUniqueName": "/Users/ASUS/Desktop/calendar/CoffeeChatCalendar/CoffeeChatCalendar.csproj",
         "projectName": "CoffeeChatCalendar",
-        "projectPath": "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/CoffeeChatCalendar.csproj",
+        "projectPath": "/Users/ASUS/Desktop/calendar/CoffeeChatCalendar/CoffeeChatCalendar.csproj",
         "packagesPath": "/Users/ASUS/.nuget/packages/",
-        "outputPath": "/Users/ASUS/Desktop/calendar/CoffeeChatCalender/obj/",
+        "outputPath": "/Users/ASUS/Desktop/calendar/CoffeeChatCalendar/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ASUS/.nuget/NuGet/NuGet.Config"

@@ -1,5 +1,6 @@
 ﻿using System;  // Brings in the System namespace, which contains basic tools like Console
 using System.Collections.Generic; // Brings in tools for working with lists and collections
+using System.Runtime.CompilerServices;
 using CoffeeChatCalendar; //imports CoffeeChatCalender namespace
 
 class Program
@@ -13,8 +14,43 @@ class Program
 
     static List<Booking> bookings = new List<Booking>(); // List to store user bookings
 
+
     static void Main() // Main method: Entry point of the program
     {
+        List<User> users = new List<User>(); //List to store user profiles. Should be put here instead of DataModels.cs because it runs the logic, not just define what the data looks like 
+        Console.WriteLine("Welcome to the Coffee Chat Booking System!"); //Welcome message
+        Console.WriteLine("======================================="); // Display a separator line
+
+        Console.Write("Please enter your name here: ");
+        string name = Console.ReadLine() ?? string.Empty; //?? = null-coalescing operator, if the vale isn't null, use the value on the left, it is null, use the value on the right.
+
+        Console.WriteLine("Please enter your available times in the following format: 9:00 AM, 10:00 AM, 4:00 PM");
+        string timesInput = Console.ReadLine() ?? string.Empty; // Handle potential null value
+        List<string> availableTimes = timesInput.Split(',').Select(t => t.Trim()).ToList();
+
+        if (string.IsNullOrWhiteSpace(name) || availableTimes.Count == 0) // Validate inputs
+        {
+            Console.WriteLine("Invalid input. Please restart the program and provide valid details.");
+            return;
+        }
+        User newUser = new User(name, availableTimes); // Create a new user object (profile)
+        foreach (var time in newUser.AvailableTimes) // Loop through the available times
+        {
+            Console.WriteLine($"What topic are you open to at {time}?");
+            string topicInput = Console.ReadLine() ?? string.Empty;
+            newUser.TimeTopics[time] = topicInput; //[] = lets you assign or access a value in a dict.
+
+        }
+
+        users.Add(newUser); // Store the new user in the users list
+
+        Console.WriteLine($"Welcome {name}!");
+        Console.WriteLine("Times and topics you're open to: ");
+        foreach (var entry in newUser.TimeTopics)
+        {
+            Console.WriteLine($"{entry.Key} - {entry.Value}"); //entry.Key = time, entry.Value = topic
+        }
+
         while (true) // Infinite loop to keep the program running until the user exits
         {
             Console.WriteLine("Book a Quick Coffee Chat"); // Display the program title
@@ -31,7 +67,9 @@ class Program
                 case "2": BookChat(); break; // Call BookChat() if the user selects 2
                 case "3": ViewBookings(); break; // Call ViewBookings() if the user selects 3
                 case "4": return; // Exit the program if the user selects 4
-                default: Console.WriteLine("Invalid input, please try again."); break; // Handle invalid input
+                default:
+                    Console.WriteLine("Invalid input, please try again.");
+                    break; // Handle invalid input
             }
         }
     }
