@@ -43,5 +43,25 @@ class User
     }
 }
 
+class MockData
+{
+    public static List<User> getMockUsers() //create a method that returns a list of users
+    {
+        var user1 = new User ("Cheyenne", new List<string> {"09:30 AM", "12:30 PM", "03:30 PM", "20:00 PM"}); //create a new user object while symultaneously creating a new list of available times
+        user1.TimeTopics["09:30 AM"] = "How did I land my first internship?"; // [] = key; assign a topic to the time key 
+        user1.TimeTopics["12:30 PM"] = "Technical interview prep.";
+        user1.TimeTopics["03:30 PM"] = "What employers mean when they say company-culture fit."; 
+        user1.TimeTopics["20:00 PM"] = "Test and reviews of the latest AI tools.";
+
+        var user2 = new User ("Henry", new List<string> {"13:00 PM", "21:00 PM", "22:00 PM'"}); 
+        user2.TimeTopics["13:00 PM"] = "Life as a CS student.";
+        user2.TimeTopics["21:00 PM"] = "College application assistance.";
+        user2.TimeTopics["22:00 PM"] = "How to start coding your first project.";
+
+        return new List<User> { user1, user2 }; //create a new list to hold all the users and return it 
+    }
+
+}
+
 
 

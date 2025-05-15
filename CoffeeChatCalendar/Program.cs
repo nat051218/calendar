@@ -47,6 +47,8 @@ class Program
         Console.WriteLine("Welcome to the Coffee Chat Booking System!");
         Console.WriteLine("=======================================");
 
+        users.AddRange(MockData.getMockUsers()); //add mock users to the users list; AddRange vs. Add = AddRange adds multiple items at once, while Add only adds one item at a time;
+
         string name = GetValidatedInput("Please enter your name here: ");
         List<string> availableTimes = GetValidatedTimeInput("Please enter your available times in the following format: 9:00 AM, 10:00 AM, 4:00 PM");
 
@@ -106,6 +108,9 @@ class Program
         Dictionary<int, (User, string)> options = new Dictionary<int, (User, string)>(); //Create a dict. to store the available chats. User = key. String = value.
         foreach (var user in users) //Loop through the users
         {
+           if (user.Name == name) 
+                continue; //Skip the loop to prevent self-booking
+
             foreach (var entry in user.TimeTopics) //Loop through time-topic pairs 
             {
                 string time = entry.Key;
@@ -151,7 +156,7 @@ class Program
         Console.WriteLine("\nYour future bookings!"); // Display a header
         foreach (var b in bookings) // Loop through the list of bookings
         {
-            Console.WriteLine($"\n{b.Name} - {b.Topic.Title} - {b.Time}"); // Display each booking with the user's name, topic, and time
+            Console.WriteLine($"\n{b.Name} - {b.selectedUser.Name} - {b.Topic.Title} - {b.Time}"); // Display each booking with the user's name, topic, and time; call the Name propoerty of the selectedUser object instead of the object itself to print out the host's name;
         }
     }
 }
